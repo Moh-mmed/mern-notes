@@ -1,12 +1,11 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import { HiHome } from "react-icons/hi";
 import { useNavigate, useLocation } from "react-router-dom";
-import useAuth  from '../hooks/useAuth'
+import useAuth from "../hooks/useAuth";
 
 const DashFooter = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const {username, status} = useAuth()
+  const { username, status } = useAuth();
 
   const onGoHomeClicked = () => navigate("/dash");
 
@@ -18,7 +17,7 @@ const DashFooter = () => {
         title="Home"
         onClick={onGoHomeClicked}
       >
-        <FontAwesomeIcon icon={faHouse} />
+        <HiHome />
       </button>
     );
   }

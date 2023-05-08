@@ -1,19 +1,15 @@
 import { useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFileCirclePlus,
-  faFilePen,
-  faUserGear,
-  faUserPlus,
-  faRightFromBracket,
-} from "@fortawesome/free-solid-svg-icons";
+import { FaUsers, FaUserPlus } from "react-icons/fa";
+import { MdLogout } from "react-icons/md";
+import { HiDocumentAdd } from "react-icons/hi";
+import {HiClipboardDocumentList } from "react-icons/hi2";
+
 import { useNavigate, Link, useLocation } from "react-router-dom";
 
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
 
 import useAuth from "../hooks/useAuth";
 
-const DASH_REGEX = /^\/dash(\/)?$/;
 const NOTES_REGEX = /^\/dash\/notes(\/)?$/;
 const USERS_REGEX = /^\/dash\/users(\/)?$/;
 
@@ -35,15 +31,6 @@ const DashHeader = () => {
   const onNotesClicked = () => navigate("/dash/notes");
   const onUsersClicked = () => navigate("/dash/users");
 
-  let dashClass = null;
-  if (
-    !DASH_REGEX.test(pathname) &&
-    !NOTES_REGEX.test(pathname) &&
-    !USERS_REGEX.test(pathname)
-  ) {
-    dashClass = "dash-header__container--small";
-  }
-
   let newNoteButton = null;
   if (NOTES_REGEX.test(pathname)) {
     newNoteButton = (
@@ -52,7 +39,7 @@ const DashHeader = () => {
         title="New Note"
         onClick={onNewNoteClicked}
       >
-        <FontAwesomeIcon icon={faFileCirclePlus} />
+        <HiDocumentAdd  />
       </button>
     );
   }
@@ -65,7 +52,7 @@ const DashHeader = () => {
         title="New User"
         onClick={onNewUserClicked}
       >
-        <FontAwesomeIcon icon={faUserPlus} />
+        <FaUserPlus />
       </button>
     );
   }
@@ -75,7 +62,7 @@ const DashHeader = () => {
     if (!USERS_REGEX.test(pathname) && pathname.includes("/dash")) {
       userButton = (
         <button className="icon-button" title="Users" onClick={onUsersClicked}>
-          <FontAwesomeIcon icon={faUserGear} />
+          <FaUsers />
         </button>
       );
     }
@@ -85,14 +72,14 @@ const DashHeader = () => {
   if (!NOTES_REGEX.test(pathname) && pathname.includes("/dash")) {
     notesButton = (
       <button className="icon-button" title="Notes" onClick={onNotesClicked}>
-        <FontAwesomeIcon icon={faFilePen} />
+        <HiClipboardDocumentList />
       </button>
     );
   }
 
   const logoutButton = (
     <button className="icon-button" title="Logout" onClick={sendLogout}>
-      <FontAwesomeIcon icon={faRightFromBracket} />
+      <MdLogout />
     </button>
   );
 
@@ -118,7 +105,7 @@ const DashHeader = () => {
       <p className={errClass}>{error?.data?.message}</p>
 
       <header className="dash-header">
-        <div className={`dash-header__container ${dashClass}`}>
+        <div className={`dash-header__container`}>
           <Link to="/dash">
             <h1 className="dash-header__title">techNotes</h1>
           </Link>

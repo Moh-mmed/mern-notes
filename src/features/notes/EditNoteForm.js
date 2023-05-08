@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useUpdateNoteMutation, useDeleteNoteMutation } from "./notesApiSlice";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import {MdOutlineSave} from 'react-icons/md'
+import { HiOutlineTrash } from "react-icons/hi";
+import { FaExclamationTriangle } from "react-icons/fa";
+
 import useAuth from "../../hooks/useAuth";
 
 const EditNoteForm = ({ note, users }) => {
@@ -75,11 +77,9 @@ const EditNoteForm = ({ note, users }) => {
     );
   });
 
-  const errClass = isError || isDelError ? "errmsg" : "offscreen";
   const validTitleClass = !title ? "form__input--incomplete" : "";
   const validTextClass = !text ? "form__input--incomplete" : "";
 
-  const errContent = (error?.data?.message || delerror?.data?.message) ?? "";
 
   let deleteButton = null;
   if (isManager || isAdmin) {
@@ -89,14 +89,19 @@ const EditNoteForm = ({ note, users }) => {
         title="Delete"
         onClick={onDeleteNoteClicked}
       >
-        <FontAwesomeIcon icon={faTrashCan} />
+        <HiOutlineTrash />
       </button>
     );
   }
 
   const content = (
     <>
-      <p className={errClass}>{errContent}</p>
+      {(error || delerror) && (
+        <div className="errmsg">
+          <FaExclamationTriangle />
+          <p>{(error?.data?.message || delerror?.data?.message) ?? ""}</p>
+        </div>
+      )}
 
       <form className="form" onSubmit={(e) => e.preventDefault()}>
         <div className="form__title-row">
@@ -108,7 +113,7 @@ const EditNoteForm = ({ note, users }) => {
               onClick={onSaveNoteClicked}
               disabled={!canSave}
             >
-              <FontAwesomeIcon icon={faSave} />
+              <MdOutlineSave />
             </button>
             {deleteButton}
           </div>

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useUpdateUserMutation, useDeleteUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { MdOutlineSave } from "react-icons/md";
+import { HiOutlineTrash } from "react-icons/hi";
+import { FaExclamationTriangle } from "react-icons/fa";
 import { ROLES } from "../../config/roles";
 
 const USER_REGEX = /^[A-z]{3,20}$/;
@@ -104,7 +105,6 @@ const EditUserForm = ({ user }) => {
     canSave = [roles.length, validUsername].every(Boolean) && !isLoading;
   }
 
-  const errClass = isError || isDelError ? "errmsg" : "offscreen";
   const validUserClass = !validUsername ? "form__input--incomplete" : "";
   const validPwdClass =
     password && !validPassword ? "form__input--incomplete" : "";
@@ -115,11 +115,15 @@ const EditUserForm = ({ user }) => {
     ? "form__input--incomplete"
     : "";
 
-  const errContent = (error?.data?.message || delerror?.data?.message) ?? "";
 
   const content = (
     <>
-      <p className={errClass}>{errContent}</p>
+      {(error || delerror) && (
+        <div className="errmsg">
+          <FaExclamationTriangle />
+          <p>{(error?.data?.message || delerror?.data?.message) ?? ""}</p>
+        </div>
+      )}
 
       <form className="form" onSubmit={(e) => e.preventDefault()}>
         <div className="form__title-row">
@@ -131,14 +135,14 @@ const EditUserForm = ({ user }) => {
               onClick={onSaveUserClicked}
               disabled={!canSave}
             >
-              <FontAwesomeIcon icon={faSave} />
+              <MdOutlineSave />
             </button>
             <button
               className="icon-button"
               title="Delete"
               onClick={onDeleteUserClicked}
             >
-              <FontAwesomeIcon icon={faTrashCan} />
+              <HiOutlineTrash />
             </button>
           </div>
         </div>

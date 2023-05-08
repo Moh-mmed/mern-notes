@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useAddNewUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave } from "@fortawesome/free-solid-svg-icons";
+import { MdOutlineSave } from "react-icons/md";
+import { FaExclamationTriangle } from "react-icons/fa";
 import { ROLES } from "../../config/roles";
 import useTitle from "../../hooks/useTitle";
 
@@ -77,7 +77,6 @@ const NewUserForm = () => {
     );
   });
 
-  const errClass = isError ? "errmsg" : "offscreen";
   const validUserClass = !validUsername ? "form__input--incomplete" : "";
   const validPwdClass = !validPassword ? "form__input--incomplete" : "";
   const validPwdConfClass = !validPasswordConfirm ? "form__input--incomplete" : "";
@@ -87,14 +86,18 @@ const NewUserForm = () => {
 
   const content = (
     <>
-      <p className={errClass}>{error?.data?.message}</p>
-
+      {(error) && (
+        <div className="errmsg">
+          <FaExclamationTriangle />
+          <p>{error?.data?.message ?? ""}</p>
+        </div>
+      )}
       <form className="form" onSubmit={onSaveUserClicked}>
         <div className="form__title-row">
           <h2>New User</h2>
           <div className="form__action-buttons">
             <button className="icon-button" title="Save" disabled={!canSave}>
-              <FontAwesomeIcon icon={faSave} />
+              <MdOutlineSave />
             </button>
           </div>
         </div>

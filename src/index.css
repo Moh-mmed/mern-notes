@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300&display=swap');
 
 * {
   margin: 0;
@@ -10,30 +10,32 @@
 
 :root {
   /* COLORS */
-  --BGCOLOR: #0F172A;
+  --BGCOLOR: #49390f;
   --BORDER-COLOR: #FFF;
   --COLOR: #FFF;
-  --ERROR: firebrick;
+  --ERROR: rgb(230, 26, 26);
   --INACTIVE: lightgray;
   --LINK-COLOR: whitesmoke;
   --LINK-HOVER: rgba(245, 245, 245, 0.9);
-  --NOTE-BGCOLOR: hsla(240, 64%, 27%, 0.65);
+  --NOTE-BGCOLOR: hsla(140, 100%, 16%, 0.65);
   --STATUS-COMPLETE: limegreen;
-  --STATUS-OPEN: firebrick;
+  --STATUS-OPEN: rgb(197, 18, 18);
   --TABLE-BGCOLOR: #FFF;
   --TABLE-COLOR: #000;
-  --INPUT-INVALID: #F00;
+  --INPUT-INVALID: rgb(228, 34, 8);
 }
 
 /* || UTILITY CLASSES */
 .errmsg {
-  display: inline-block;
-  background-color: var(--TABLE-BGCOLOR);
-  color: var(--ERROR);
-  padding: 0.25em;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #FEE2E2;
+  color: #C53030;
+  padding: 0.5em;
   margin-bottom: 0.5em;
 }
-
 .errmsg a:any-link {
   color: var(--ERROR);
   text-decoration: underline;
@@ -44,9 +46,9 @@
 }
 
 .icon-button {
-  width: 48px;
-  height: 48px;
-  font-size: 2.5rem;
+  width: 30px;
+  height: 30px;
+  font-size: 1.8rem;
   background-color: transparent;
   border: none;
   color: var(--COLOR);
@@ -66,7 +68,7 @@
 /* || GENERAL STYLES */
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Poppins', sans-serif;
   min-height: 100vh;
   background-color: var(--BGCOLOR);
   color: var(--COLOR);
@@ -123,8 +125,13 @@ a:focus-visible {
   border-top: 2px solid var(--BORDER-COLOR);
   border-bottom: 2px solid var(--BORDER-COLOR);
   padding: 1em 0;
-}
 
+}
+.login{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .public__addr {
   margin-top: 1em;
 }
@@ -165,6 +172,9 @@ a:focus-visible {
 .dash-container {
   padding: 0.75em 0.5em 0.5em;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .dash-footer {
@@ -182,7 +192,7 @@ a:focus-visible {
 }
 
 .dash-footer__button {
-  font-size: 1rem;
+  font-size: 1.2rem;
   width: auto;
   height: auto;
 }
@@ -201,7 +211,7 @@ tr {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   color: var(--TABLE-COLOR);
-  gap: 0.1em;
+  border-radius: 5px;
 }
 
 .table__button {
@@ -214,6 +224,8 @@ tr {
   position: sticky;
   top: 0;
   z-index: 1;
+  background-color: var(--TABLE-BGCOLOR);
+  border-radius: 5px 5px 0 0;
 }
 
 .table__th,
@@ -231,8 +243,9 @@ tr {
 
 .table__cell--inactive {
   background-color: var(--INACTIVE);
+  color: var(--TABLE-COLOR);
+  border-radius: 0 5px 5px 0;
 }
-
 /* ||  NOTE */
 
 .note__created,
@@ -260,7 +273,8 @@ tr {
   display: flex;
   flex-flow: column nowrap;
   gap: 0.75em;
-  max-width: 800px;
+  width: 100%;
+  max-width: 700px;
 }
 
 .form__checkbox-container {
@@ -270,27 +284,47 @@ tr {
   gap: 0.5em;
 }
 
-.form__persist {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 0.5em;
-}
 
 .form__title-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
-.form__input,
-.form__submit-button {
-  padding: 0.5em;
-  border-radius: 15px;
+.form__input {
+  display: block;
+  margin-bottom: 1em;
+  padding: 0.8em;
+  border: none;
+  border-radius: 6px;
+  background-color: #F5F5F5;
+  font-size: 1rem;
+  color: #333;
+}
+
+.form__input:focus {
+outline: none;
+box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 .form__input--text {
-  min-height: 150px;
+resize: none;
+min-height: 200px;
+}
+
+.form__submit-button {
+  display: inline-block;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 8px;
+  background-color: #4CAF50;
+  color: #FFF;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.form__submit-button:hover {
+background-color: #3E8E41;
 }
 
 .form__input--incomplete {
@@ -339,7 +373,7 @@ tr {
   }
 
   .icon-button {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 }
 

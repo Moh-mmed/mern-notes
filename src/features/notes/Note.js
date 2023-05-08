@@ -1,6 +1,5 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { FiEdit } from  'react-icons/fi'
 
 const Note = ({ data }) => {
 
@@ -34,7 +33,7 @@ const Note = ({ data }) => {
 
         <td className="table__cell">
           <button className="icon-button table__button" onClick={handleEdit}>
-            <FontAwesomeIcon icon={faPenToSquare} />
+            <FiEdit />
           </button>
         </td>
       </tr>
