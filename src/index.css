@@ -131,6 +131,7 @@ a:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 .public__addr {
   margin-top: 1em;
